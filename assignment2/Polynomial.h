@@ -248,7 +248,7 @@ void Polynomial::addTermToArrSortedDeduplicateByExponent(Term * termArr, int & t
 		for (; j > i; j--) {
 			termArr[j + 1] = termArr[j];
 		}
-		termArr[j] = t;
+		termArr[j+1] = t;
 		termArrSize++;
 	}
 }
