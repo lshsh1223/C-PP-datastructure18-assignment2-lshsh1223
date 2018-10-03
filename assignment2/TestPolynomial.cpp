@@ -1,66 +1,94 @@
-#pragma warning(disable : 4996)
-
 #include <iostream>
-
+#include <cstdlib>
+#include <Windows.h>
+#include <iomanip>
 #include "Polynomial.h"
 
-int Polynomial::capacity = 100;
-Term *Polynomial::termArray = new Term[100];
-int Polynomial::free = 0;
+using namespace std;
 
-int main(void) {
-	int choice;
 
-	Polynomial P1, P2, P3;
-	cout << "Instruction:-Enter the Polynomial like\nP(x)=5x^3+0x^2+3x^1+0x^0\n";
-	cout << "error input: 1x^2+1x^3, because input exponents should be in descending order\n" << endl;
-	cout << "Enter Polynomial1:- (input exponents in descending order)" << endl;
-	P1.GetData();
-	cout << "Enter Polynomial2:- (input exponents in descending order)" << endl;
-	P2.GetData();
 
-	while (1) {
-		cout << "\n****** Menu Selection ******" << endl;
-		cout << "1: Addition\n2: Substraction\n3: Multiplication\n0: Exit" << endl;
-		cout << "Enter your choice:";
-		cin >> choice;
-		switch (choice) {
-		case 1:
-			cout << "\n--------------- Addition ---------------\n";
-			cout << "Polynomial1:";
-			P1.Display();
-			cout << "Polynomial2:";
-			P2.Display();
-			P3 = P1.Add(P2);
-			P3.Display();
-			cout << "----------------------------------------\n";
-			break;
-		case 2:
 
-			cout << "\n------------- Substraction -------------\n";
-			cout << "Polynomial1:";
-			P1.Display();
-			cout << "Polynomial2:";
-			P2.Display();
-			P3 = P1.Sub(P2);
-			P3.Display();
-			cout << "----------------------------------------\n";
-			break;
-		case 3:
-			cout << "\n----------- Multiplication -------------\n";
-			cout << "Polynomial1:";
-			P1.Display();
-			cout << "Polynomial2:";
-			P2.Display();
-			P3 = P1.Multiply(P2);
-			P3.Display();
-			cout << "----------------------------------------\n";
-			break;
-		case 0:
-			cout << "Good Bye...!!!" << endl;
-			exit(0);
-		}
+int main(void)
+
+{
+	int m, n;
+
+	srand((unsigned)time(NULL));
+	int x, ibug, jbug, counter = 0;
+
+
+
+	cout << "가로 크기(m):(2~40) ";
+
+	cin >> m;
+
+	while (m > 40 || m < 2)
+
+	{
+
+		cout << "범위에 안맞음" << endl << "2~40 사이: ";
+
+		cin >> m;
+
 	}
+
+	cout << "세로 크기(n):(2~20) ";
+
+	cin >> n;
+
+	while (n > 20 || n < 2)
+
+	{
+
+		cout << "범위에 안맞음" << endl << "2~20 사이: ";
+
+		cin >> n;
+
+	}
+
+
+	cout << "시작점 : ( , ) ";
+
+	cin >> ibug >> jbug;
+
+
+	Matrix a(m, n);
+
+
+
+
+
+
+	while ((!a.All_tile(a)) && (counter < 50000))
+
+	{
+
+		do
+
+		{
+
+			x = rand() % 8;
+
+		} while (!a.moving(x, ibug, jbug));
+
+		a.Count(ibug, jbug);
+
+		counter++;
+
+	}
+
+
+
+	cout << "총 움직인 횟수: " << counter << endl;
+
+	a.display(counter);
+
+	cout << "모든 타일을 밟았습니다" << endl;
+
+
+
 	system("pause");
 	return 0;
+
 }
